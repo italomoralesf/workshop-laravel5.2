@@ -19,6 +19,15 @@ class KeepController extends Controller
         $this->middleware('auth');
     }
     
+    public function update(Keep $keep){
+        $this->authorize('update', $keep);
+        
+        $keep->status = $keep->status === 'full' ? 'incomplete' : 'full';
+        $keep->save();
+        
+        return back();
+    }
+    
     public function store(Request $request){
         $this->validate($request, [
             'keep' => 'required|max:60'
@@ -31,7 +40,7 @@ class KeepController extends Controller
         return back();
     }
     
-    public function destroy(Request $request, Keep $keep){
+    public function destroy(Keep $keep){
         $this->authorize('destroy', $keep);
         
         $keep->delete();

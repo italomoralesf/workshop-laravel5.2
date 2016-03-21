@@ -44,14 +44,28 @@
                                 <th width="40">ID</th>
                                 <th>No olvidar</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($keeps as $keep)
                             <tr @if($keep->status == 'full') class='text-muted' title="completada" @endif>
-                                 <td width="40">{{ $keep->id }}</td>
+                                <td width="40">{{ $keep->id }}</td>
                                 <td>{{ $keep->keep }}</td>
-                                <td>
+                                <td width="40">
+                                    <form action="{{ route('keep.update', $keep->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PUT') }}
+                                        <button class="btn btn-primary">
+                                            @if($keep->status === 'full')
+                                            <i class="glyphicon glyphicon-eye-open" title="Abrir"></i>
+                                            @else
+                                            <i class="glyphicon glyphicon-check" title="Terminada"></i>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </td>
+                                <td width="90">
                                     <form action="{{ route('keep.destroy', $keep->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}

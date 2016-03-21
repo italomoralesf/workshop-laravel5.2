@@ -38,7 +38,7 @@ Route::group(['middleware' => 'web'], function () {
             'index', 
             'edit', 
             'create',
-            'show'
+            'show',
         ]
     ]);
     
