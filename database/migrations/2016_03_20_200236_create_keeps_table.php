@@ -16,6 +16,7 @@ class CreateKeepsTable extends Migration
             $table->increments('id');
             
             $table->string('keep');
+            $table->enum('status', ['full', 'incomplete'])->default('incomplete');
             $table->integer('user_id')->unsigned();
             
             $table->timestamps();

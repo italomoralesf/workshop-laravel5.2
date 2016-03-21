@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Keep;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -22,8 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $keeps = Keep::orderBy('id', 'DESC')
+                ->where('user_id', $request->user()->id)
+                ->get();
+        return view('home', compact('keeps'));
     }
 }
