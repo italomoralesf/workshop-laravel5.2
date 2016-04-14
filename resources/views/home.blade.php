@@ -56,7 +56,7 @@
                                     <form action="{{ route('keep.update', $keep->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" id="btn-keep">
                                             @if($keep->status === 'full')
                                             <i class="glyphicon glyphicon-eye-open" title="Abrir"></i>
                                             @else
